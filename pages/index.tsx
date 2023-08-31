@@ -2,6 +2,7 @@ import Head from 'next/head'
 import fs from 'fs/promises'
 import Image from 'next/image'
 import Link from 'next/link'
+import { Layout } from '@/components'
 
 interface comic {
   id: number
@@ -28,7 +29,7 @@ export default function Home({ latestComics }: IProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
+      <Layout>
         <h2 className="text-2xl font-bold text-center">Latest Comics</h2>
         <section
           className="grid grid-cols-1 gap-2 max-w-xl mx-auto sm:grid-cols-2
@@ -54,7 +55,7 @@ export default function Home({ latestComics }: IProps) {
             </Link>
           ))}
         </section>
-      </main>
+      </Layout>
     </>
   )
 }

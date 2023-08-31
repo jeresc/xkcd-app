@@ -1,3 +1,4 @@
+import { Layout } from '@/components'
 import { readFile, readdir, stat } from 'fs/promises'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -37,7 +38,7 @@ export default function Comic({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
+      <Layout>
         <section className="max-w-lg m-auto">
           <h1 className="text-xl font-bold text-center mb-4">{title}</h1>
           <div className="max-w-sm m-auto mb-4">
@@ -65,7 +66,7 @@ export default function Comic({
             )}
           </div>
         </section>
-      </main>
+      </Layout>
     </>
   )
 }
