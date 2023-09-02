@@ -70,7 +70,6 @@ export const getStaticProps = async () => {
   })
 
   const latestComics = await Promise.all(promisesReadFiles)
-  console.log(latestComics)
 
   return {
     props: {
