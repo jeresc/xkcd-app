@@ -71,15 +71,23 @@ export default function Comic({
   )
 }
 
-export async function getStaticPaths() {
+export async function getStaticPaths({ locales }) {
   const files = await readdir('./comics')
-  const paths = files.map((file) => ({
-    params: { comicId: basename(file, '.json') },
-  }))
+
+  let paths = []
+
+  locales.forEach((locale) => {
+    paths = paths.concat(
+      files.map((file) => ({
+        params: { comicId: basename(file, '.json') },
+        locale,
+      }))
+    )
+  })
 
   return {
     paths,
-    fallback: true, // false or blocking
+    fallback: false, // false or blocking
   }
 }
 

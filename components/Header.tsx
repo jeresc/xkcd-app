@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React, { useRef, useState } from 'react'
 
 interface IApiResponse {
@@ -11,14 +12,29 @@ interface IApiResponse {
 export function Header() {
   const [results, setResults] = useState<IApiResponse[]>([])
   const searchRef = useRef<HTMLInputElement>(null)
+  const { locale, locales } = useRouter()
 
-  const q = searchRef.current?.value
+  let q = searchRef.current?.value
   const handleChange = () => {
+    q = searchRef.current?.value
+    if (!q) return setResults([])
     fetch(`/api/search?q=${q}`)
       .then((res) => res.json())
       .then((searchResults) => {
         setResults(searchResults)
       })
+  }
+
+  const restOfLocales = locales.filter((l) => l !== locale)
+
+  {
+    /* const showLocales = () => {
+    const restOfLocales = locales.filter((l) => l !== locale)
+    return {
+      selectedLocale: locale,
+      restOfLocales,
+    }
+  } */
   }
 
   return (
@@ -34,7 +50,9 @@ export function Header() {
             <Link href="/">Home</Link>
           </li>
           <li>
-            <Link href="/about">About</Link>
+            <Link href="/" locale={restOfLocales[0]}>
+              {restOfLocales[0]}
+            </Link>
           </li>
           <li>
             <input

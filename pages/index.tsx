@@ -3,6 +3,7 @@ import fs from 'fs/promises'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Layout } from '@/components'
+import { useI18N } from '@/context/i18n'
 
 interface comic {
   id: number
@@ -21,16 +22,14 @@ interface IProps {
 }
 
 export default function Home({ latestComics }: IProps) {
+  const { t } = useI18N()
   return (
     <>
       <Head>
-        <title>xkcd - Comics for developers</title>
         <meta name="description" content="Comics for developers" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <h2 className="text-2xl font-bold text-center">Latest Comics</h2>
+        <h2 className="text-2xl font-bold text-center">{t('LATEST_COMICS')}</h2>
         <section
           className="grid grid-cols-1 gap-2 max-w-xl mx-auto sm:grid-cols-2
           md:grid-cols-3"
